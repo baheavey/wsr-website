@@ -1,0 +1,27 @@
+#config.yaml
+version: 1
+formatters:
+  simple:
+    format: '%(asctime)s - %(name)s - %(levelname)s - %(message)s'
+handlers:
+  console:
+    class: logging.StreamHandler
+    level: DEBUG
+    formatter: simple
+    stream: ext://sys.stdout
+loggers:
+  example_module:
+    level: DEBUG
+    handlers: [console, email]
+    propagate: no
+  email:
+    class: logging.handlers.SMTPHandler
+    level: ERROR
+    mailhost: <your mail server>
+    fromaddr: <email from address>
+    toaddrs: <email to address>
+    subject: <your subject line>
+    credentials: !!python/tuple [<login>, <password>]
+root:
+  level: DEBUG
+  handlers: [console]
